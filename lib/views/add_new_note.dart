@@ -1,30 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:note_app_api/controller/add_new_provider.dart';
 import 'package:note_app_api/core/colors.dart';
 import 'package:note_app_api/core/constants.dart';
 import 'package:note_app_api/views/home_screen.dart';
-import 'package:note_app_api/views/view_note_screen.dart';
 import 'package:note_app_api/views/widgets/show_dialogue_widget.dart';
 import 'package:note_app_api/views/widgets/small_widget.dart';
+import 'package:provider/provider.dart';
 
-class AddNoteScreen extends StatefulWidget {
+class AddNoteScreen extends StatelessWidget {
   AddNoteScreen({
     super.key,
   });
 
-  @override
-  State<AddNoteScreen> createState() => _AddNoteScreenState();
-}
-
-class _AddNoteScreenState extends State<AddNoteScreen> {
   final GlobalKey<FormState> formKey = GlobalKey();
-
   final TextEditingController titleController = TextEditingController();
-
   final TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final noteProvider = Provider.of<AddNewNoteProvider>(context);
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -92,6 +86,9 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                           color: greyColor,
                         )),
                     controller: titleController,
+                    onChanged: (value) {
+                      noteProvider.updateTitle(value);
+                    },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'fill';
@@ -107,6 +104,9 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
                     controller: descriptionController,
+                    onChanged: (value) {
+                      noteProvider.updateDescription(value);
+                    },
                     decoration: const InputDecoration.collapsed(
                         hintText: 'Type something...',
                         hintStyle: TextStyle(color: greyColor)),

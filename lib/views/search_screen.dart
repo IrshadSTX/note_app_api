@@ -24,7 +24,7 @@ class Debouncer {
       timer!.cancel();
     }
     timer = Timer(
-      Duration(milliseconds: Duration.millisecondsPerSecond),
+      const Duration(milliseconds: Duration.millisecondsPerSecond),
       action,
     );
   }

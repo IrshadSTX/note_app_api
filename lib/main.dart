@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:note_app_api/controller/add_new_provider.dart';
 import 'package:note_app_api/controller/splash_screen_provider.dart';
 import 'package:note_app_api/views/splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(
             create: (BuildContext context) => SplashScreenProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (BuildContext context) => AddNewNoteProvider(),
           ),
         ],
         child: MaterialApp(
